@@ -1,6 +1,7 @@
 # Sistema de Gestión Escolar
 
 ## Integrantes
+
 - [Mateo Cardenas Osorio]
 - [Andres Navarro de la hoz]
 - [Rina Plata Lopez]
@@ -16,18 +17,20 @@ El Sistema de Gestión Escolar es una aplicación desarrollada para ayudar a las
 
 ## Uso
 
-### Entorno virtual 
+### Entorno virtual
 
 1. **Creación del entorno**
+
 ```bash
 python -m venv .env
 ```
+
 2. **Ejecutar**
 
-| Sistema       | Comando                  |
-| ------------- | -------------------------|
-| Windows       | .env\Scripts\Activate    |
-| Linux         | source .env/bin/activate |
+| Sistema | Comando                  |
+| ------- | ------------------------ |
+| Windows | .env\Scripts\Activate    |
+| Linux   | source .env/bin/activate |
 
 ### Estructura de la Base de Datos
 
@@ -38,3 +41,7 @@ python -m venv .env
 5. **Calificaciones (Grades)**
 
 ## **Ruta de Swagger:**
+
+## Arquitectura
+
+![Arquitecutra](./Doc/img/Arquitectura%20Back%20Gestion%20Escolar.jpg)
