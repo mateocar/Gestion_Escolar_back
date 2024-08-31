@@ -2,9 +2,9 @@
 
 ## Integrantes
 
-- [Mateo Cardenas Osorio]
-- [Andres Navarro de la hoz]
-- [Rina Plata Lopez]
+- [Mateo Cardenas Osorio](https://github.com/mateocar)
+- [Andres David Navarro De la Hoz](https://github.com/eldelahoz)
+- [Rina Plata Lopez](https://github.com/Rinaplata/)
 
 ## Descripción del Proyecto
 
