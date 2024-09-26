@@ -39,6 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'rest_framework.authtoken',
+    
+    'app.courses',
+    'app.grades',
+    'app.students',
+    'app.teachers',
+    'app.users',
 ]
 
 MIDDLEWARE = [
@@ -70,7 +77,15 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'gestion_escolar.wsgi.application'
+# REST FRAMEWORK
 
+AUTH_USER_MODEL = 'users.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
