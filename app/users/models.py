@@ -1,6 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
-class User(models.models):
+class User(AbstractUser):
     ROLES = (
         ('student', 'Estudiante'),
         ('teacher', 'Profesor'),
@@ -8,10 +9,10 @@ class User(models.models):
     )
     id = models.AutoField(primary_key=True)
     full_name = models.CharField(max_length=100)
-    email = models.CharField(max_length=50)
     phone = models.CharField(max_length=15)
     date_birth = models.DateField()
     address = models.CharField(100)
-    rol = models.CharField(max_length=15, choices=ROLES)
-    username = models.CharField(100)
-    password = models.CharField(50)
+    role = models.CharField(max_length=15, choices=ROLES)
+    
+    first_name = None
+    last_name = None
