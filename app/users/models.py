@@ -11,7 +11,7 @@ class User(models.models):
     email = models.CharField(max_length=50)
     phone = models.CharField(max_length=15)
     date_birth = models.DateField()
-    address = models.AutoField(100)
+    address = models.CharField(100)
     rol = models.CharField(max_length=15, choices=ROLES)
     username = models.CharField(100)
     password = models.CharField(50)
