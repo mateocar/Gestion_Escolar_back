@@ -1,7 +1,7 @@
 from django.db import models
 
 class Teacher(models.Model):
-    id = models.AutoField(primary_key=True)
+    id = models.IntegerField(primary_key=True)
     full_name = models.CharField(max_length=100)
     date_birth = models.DateField()
     gendre = models.CharField(20)
