@@ -13,7 +13,7 @@ class User(AbstractUser):
     email = models.EmailField(('email address'), unique=True)
     phone = models.CharField(max_length=15)
     date_birth = models.DateField()
-    address = models.CharField(100)
+    address = models.CharField(max_length=100)
     role_id = models.ForeignKey(Role, null=False, on_delete=models.CASCADE)
     
     first_name = None
