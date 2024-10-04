@@ -39,14 +39,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
-    'rest_framework.authtoken',
+    'rest_framework_simplejwt',
+    'drf_yasg',
     
     'app.courses',
     'app.grades',
     'app.students',
     'app.teachers',
     'app.users',
+    'app.roles',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -83,7 +86,7 @@ AUTH_USER_MODEL = 'users.User'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
 }
 
@@ -92,11 +95,8 @@ REST_FRAMEWORK = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        "OPTIONS": {
-            "service": "db_service",
-            "passfile": ".pgpass",
-        },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / "db.sqlite3",
     }
 }
 

@@ -1,4 +1,5 @@
 from django.db import models
+from ..roles.models import Role
 from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
@@ -12,8 +13,8 @@ class User(AbstractUser):
     email = models.EmailField(('email address'), unique=True)
     phone = models.CharField(max_length=15)
     date_birth = models.DateField()
-    address = models.CharField(100)
-    role = models.CharField(max_length=15, choices=ROLES)
+    address = models.CharField(max_length=100)
+    role_id = models.ForeignKey(Role, null=False, on_delete=models.CASCADE)
     
     first_name = None
     last_name = None
