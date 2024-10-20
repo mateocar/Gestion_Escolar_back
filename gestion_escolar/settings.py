@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'drf_yasg',
-    
+
     'corsheaders',
     
     'app.courses',
@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'app.users',
     'app.roles',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
