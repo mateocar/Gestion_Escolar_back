@@ -3,11 +3,6 @@ from ..roles.models import Role
 from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
-    ROLES = (
-        ('student', 'Estudiante'),
-        ('teacher', 'Profesor'),
-        ('administrator', 'Administrador')
-    )
     id = models.AutoField(primary_key=True)
     full_name = models.CharField(max_length=100)
     email = models.EmailField(('email address'), unique=True)

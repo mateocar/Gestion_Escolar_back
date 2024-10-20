@@ -26,7 +26,7 @@ The School Management System is an application developed to help schools efficie
 1. **Creating the environment**
 
 ```bash
-python -m venv .env
+python -m venv env
 ```
 
 2. **Activate**
@@ -44,16 +44,26 @@ pip install -r requirements.txt
 
 `Note: Remember to be in the folder where the requirements.txt file is located`
 
-4. **Necessary files for PostgreSQL (LOCAL)**
+> [!IMPORTANT]
+> In case you do not want to use PostgreSQL as database engine follow the SQLite steps
 
-   If you are running a database from PostgreSQL, you need to add the files to the following path depending on your operating system
+<details>
+<summary>PostgreSQL</summary>
 
-| System  | File Name        | File Path                                                                            |
-| ------- | ---------------- | ------------------------------------------------------------------------------------ |
-| Windows | .pg_service.conf | %APPDATA%\postgresql\\.pg_service.conf (SI la carpeta postgresql no existe, crearla) |
-| Linux   | .pg_service.conf | ~/.pg_service.conf (Directorio local)                                                |
+1. **Necessary files for PostgreSQL (LOCAL)**
 
-4. **Create a PostgreSQL container**
+   If you are running a database from postgres you have to add the variables in a .env file (if you don't have the file create it) and put the following variables in it:
+
+   ```bash
+       POSTGRESQL_NAME=<posgresql_database>
+       POSTGRESQL_USER=<posgresql_user>
+       POSTGRESQL_PASS=<postgresql_pass>
+       POSTGRESQL_HOST=localhost
+       POSTGRESQL_PORT=5432
+       DEBUG=True
+   ```
+
+2. **Create a PostgreSQL container**
 
    In the `docker-compose.yml` file, there is a configuration for a postgresql-alpine image for local database creation. Make sure to change the following environment variables:
 
@@ -61,6 +71,43 @@ pip install -r requirements.txt
 - POSTGRES_PASSWORD=(Same password as in the .pgpass file)
 - POSTGRES_USER=username(Same user as in the .pgpass file)
 ```
+
+</details>
+
+<details>
+<summary>SQLite</summary>
+
+1. **Change Database Engine in settings.py**
+
+In the settings.py file located in `gestion_escolar\settings.py` change the following part of code
+
+```py
+...
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': env('POSTGRESQL_NAME'),
+        'USER': env('POSTGRESQL_USER'),
+        'PASSWORD': env('POSTGRESQL_PASS'),
+        'HOST': env('POSTGRESQL_HOST'),
+        'PORT': env('POSTGRESQL_PORT'),
+    }
+}
+...
+```
+
+For this
+
+```py
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / "db.sqlite3",
+    }
+}
+```
+
+</details>
 
 ### Database Structure
 

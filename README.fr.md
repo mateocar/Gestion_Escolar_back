@@ -26,7 +26,7 @@ Le Système de Gestion Scolaire est une application développée pour aider les 
 1. **Créer l'environnement**
 
 ```bash
-python -m venv .env
+python -m venv env
 ```
 
 2. **Activer**
@@ -44,16 +44,26 @@ pip install -r requirements.txt
 
 `Note : N'oubliez pas de vous placer dans le dossier où se trouve le fichier requirements.txt`
 
-4. **Fichiers nécessaires pour PostgreSQL (LOCAL)**
+> [!IMPORTANT]
+> Si vous ne voulez pas utiliser PostgreSQL comme moteur de base de données, suivez les étapes de SQLite
 
-   Si vous exécutez une base de données PostgreSQL, vous devez ajouter les fichiers au chemin suivant selon votre système d'exploitation
+<details>
+<summary>PostgreSQL</summary>
 
-| Système | Nom du fichier   | Chemin du fichier                                                                    |
-| ------- | ---------------- | ------------------------------------------------------------------------------------ |
-| Windows | .pg_service.conf | %APPDATA%\postgresql\\.pg_service.conf (SI la carpeta postgresql no existe, crearla) |
-| Linux   | .pg_service.conf | ~/.pg_service.conf (Directorio local)                                                |
+1. **Fichiers nécessaires pour PostgreSQL (LOCAL)**
 
-4. **Créer un conteneur PostgreSQL**
+   Si vous exécutez une base de données depuis Postgres, vous devez ajouter les variables dans un fichier .env (si vous n'avez pas le fichier, créez-le) et y mettre les variables suivantes :
+
+   ```bash
+       POSTGRESQL_NAME=<posgresql_database>
+       POSTGRESQL_USER=<posgresql_user>
+       POSTGRESQL_PASS=<postgresql_pass>
+       POSTGRESQL_HOST=localhost
+       POSTGRESQL_PORT=5432
+       DEBUG=True
+   ```
+
+2. **Créer un conteneur PostgreSQL**
 
    Le fichier `docker-compose.yml` contient une configuration pour une image postgresql-alpine pour la création de la base de données en local. Veuillez modifier les variables d'environnement suivantes :
 
@@ -61,6 +71,43 @@ pip install -r requirements.txt
 - POSTGRES_PASSWORD=(Same password as in the .pgpass file)
 - POSTGRES_USER=username(Same user as in the .pgpass file)
 ```
+
+</details>
+
+<details>
+<summary>SQLite</summary>
+
+1. **Changer le moteur de base de données sur settings.py**
+
+Dans le fichier settings.py situé à `gestion_escolar\settings.py` cchanger la partie suivante du code
+
+```py
+...
+DATABASES = {
+   'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': env('POSTGRESQL_NAME'),
+        'USER': env('POSTGRESQL_USER'),
+        'PASSWORD': env('POSTGRESQL_PASS'),
+        'HOST': env('POSTGRESQL_HOST'),
+        'PORT': env('POSTGRESQL_PORT'),
+    }
+}
+...
+```
+
+Pour cette code:
+
+```py
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / "db.sqlite3",
+    }
+}
+```
+
+</details>
 
 ### Structure de la Base de Données
 

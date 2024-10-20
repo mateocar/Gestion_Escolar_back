@@ -16,23 +16,25 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
 
-# Configurar el esquema de Swagger
 schema_view = get_schema_view(
     openapi.Info(
-        title="APIREST GRUPO1",
-        default_version='v1',
-        description="CREAGO APIREST",     
-        contact=openapi.Contact(email="rinamarcelaplata@gmail.com"),
+        title="Gestion Escolar Backend",
+        default_version="1.0",
+        description="API documentacion de Gestiones Escolar Backend"
     ),
-    public=True,
+    public=True
 )
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('app.api.routers')),
-    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    path('documentation/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc' ),
+    path('api/', 
+        include([
+            path('', include('app.api.routers')),
+            path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name="swagger-schema")
+            ])
+    )
 ]
