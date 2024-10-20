@@ -5,4 +5,3 @@ from .models import Grade
 class GradeViewSet(viewsets.ModelViewSet):
     serializer_class = GradeSerializer
     queryset = Grade.objects.all()
-    

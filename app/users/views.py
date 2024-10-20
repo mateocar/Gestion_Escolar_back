@@ -1,17 +1,21 @@
 from .models import User
-from .serializers import UserSerializer, ObtainTokenSerializer
+from .serializers import UserSerializer, ObtainTokenSerializer, UserRegistrationSerializer
 from django.contrib.auth import authenticate, login
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.permissions import IsAuthenticated
+from drf_yasg.utils import swagger_auto_schema
 
 class UserRegistrationView(APIView):
+    @swagger_auto_schema(
+        request_body=UserRegistrationSerializer
+    )
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
-            # serializer.save()
+            serializer.save()
             response_data = {
                 'full_name': serializer.data['full_name'],
                 'email': serializer.data['email'],
