@@ -52,7 +52,7 @@ resource "null_resource" "docker_push" {
 }
 
 resource "azurerm_container_group" "gestionescolar" {
-  name                = "gestionescolar-bakend-group"
+  name                = "gestionescolar-container-group"
   location            = data.azurerm_resource_group.existing.location
   resource_group_name = data.azurerm_resource_group.existing.name
   os_type             = "Linux"
